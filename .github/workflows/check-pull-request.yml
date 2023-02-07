@@ -34,7 +34,7 @@ jobs:
           path: ${{ steps.gem-dir.outputs.dir }}
           key: ${{ runner.os }}-gem-danger6.2.0-dangercheckstyleformat0.1.1-dangerandroidlint0.0.8
       - name: Run ktlint
-        run: ./gradlew ktlint
+        run: ./gradlew ktlintCheck
       - name: Run Android Lint
         run: ./gradlew app:lintRelease api:lintRelease
       - name: Set up and run Danger
