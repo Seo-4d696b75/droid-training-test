@@ -34,7 +34,7 @@ jobs:
           ruby-version: '2.7'
       - name: Get gem directory path
         id: gem-dir
-        run: echo "::set-output name=dir::$(gem environment gemdir)"
+        run: echo "dir=$(gem environment gemdir)" >> $GITHUB_OUTPUT
       - name: Restore gem cache
         id: gem-cache
         uses: actions/cache@v2
