@@ -29,10 +29,9 @@ jobs:
         if: steps.gradle-cache.outputs.cache-hit != 'true'
         run: ./gradlew androidDependencies
       - name: Set up Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.6'
-          architecture: 'x64'
+          ruby-version: '2.7'
       - name: Get gem directory path
         id: gem-dir
         run: echo "::set-output name=dir::$(gem environment gemdir)"
