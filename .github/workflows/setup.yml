@@ -2,12 +2,9 @@ name: "setup"
 on:
   workflow_dispatch:
 
-env:
-  SRC_REPOSITORY: yumemi/droid-training-renewal
-
 jobs:
   get-issue-labels:
-    if: github.repository != '${{ env.SRC_REPOSITORY }}'
+    if: github.repository != 'yumemi/droid-training-renewal'
     runs-on: ubuntu-latest
     outputs:
       labels: ${{ steps.output_label_data.outputs.value }}
@@ -16,7 +13,7 @@ jobs:
         id: get_label_data
         uses: octokit/request-action@v2.1.0
         with:
-          route: GET /repos/$SRC_REPOSITORY/labels
+          route: GET /repos/yumemi/droid-training-renewal/labels
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - id: output_label_data
@@ -42,7 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   get-milestones:
-    if: github.repository != '${{ env.SRC_REPOSITORY }}'
+    if: github.repository != 'yumemi/droid-training-renewal'
     runs-on: ubuntu-latest
     outputs:
       milestones: ${{ steps.output_milestones_data.outputs.value }}
@@ -51,7 +48,7 @@ jobs:
         id: get_milestones_data
         uses: octokit/request-action@v2.1.0
         with:
-          route: GET /repos/$SRC_REPOSITORY/milestones
+          route: GET /repos/yumemi/droid-training-renewal/milestones
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - id: output_milestones_data
@@ -94,7 +91,7 @@ jobs:
           echo "::set-output name=value::${result}"
 
   get-issues:
-    if: github.repository != '${{ env.SRC_REPOSITORY }}'
+    if: github.repository != 'yumemi/droid-training-renewal'
     runs-on: ubuntu-latest
     outputs:
       issues: ${{ steps.output_issues_data.outputs.value }}
@@ -103,7 +100,7 @@ jobs:
         id: get_issues_data
         uses: octokit/request-action@v2.1.0
         with:
-          route: GET /repos/$SRC_REPOSITORY/issues
+          route: GET /repos/yumemi/droid-training-renewal/issues
           sort: created
           direction: asc
         env:
@@ -115,7 +112,7 @@ jobs:
       - run: echo -e '${{ steps.output_issues_data.outputs.value }}'
 
   get-myrepo-issues:
-    if: github.repository != '${{ env.SRC_REPOSITORY }}'
+    if: github.repository != 'yumemi/droid-training-renewal'
     runs-on: ubuntu-latest
     outputs:
       issues: ${{ steps.output_issues_data.outputs.value }}
