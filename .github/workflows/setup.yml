@@ -7,7 +7,7 @@ env:
 
 jobs:
   get-issue-labels:
-    if: github.repository != $SRC_REPOSITORY
+    if: github.repository != '${{ SRC_REPOSITORY }}'
     runs-on: ubuntu-latest
     outputs:
       labels: ${{ steps.output_label_data.outputs.value }}
@@ -42,7 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   get-milestones:
-    if: github.repository != $SRC_REPOSITORY
+    if: github.repository != '${{ SRC_REPOSITORY }}'
     runs-on: ubuntu-latest
     outputs:
       milestones: ${{ steps.output_milestones_data.outputs.value }}
@@ -94,7 +94,7 @@ jobs:
           echo "::set-output name=value::${result}"
 
   get-issues:
-    if: github.repository != $SRC_REPOSITORY
+    if: github.repository != '${{ SRC_REPOSITORY }}'
     runs-on: ubuntu-latest
     outputs:
       issues: ${{ steps.output_issues_data.outputs.value }}
@@ -115,7 +115,7 @@ jobs:
       - run: echo -e '${{ steps.output_issues_data.outputs.value }}'
 
   get-myrepo-issues:
-    if: github.repository != %SRC_REPOSITORY
+    if: github.repository != '${{ SRC_REPOSITORY }}'
     runs-on: ubuntu-latest
     outputs:
       issues: ${{ steps.output_issues_data.outputs.value }}
