@@ -2,6 +2,9 @@ name: "setup"
 on:
   workflow_dispatch:
 
+permissions:
+  issues: write
+
 jobs:
   get-issue-labels:
     if: github.repository != 'yumemi/droid-training-renewal'
