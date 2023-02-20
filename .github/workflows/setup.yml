@@ -2,17 +2,24 @@ name: "setup"
 on:
   workflow_dispatch:
 
-env:
-  src_repository: yumemi/droid-training-renewal
+permissions:
+  issues: write
 
 jobs:
-  wakeup:
+  copy-issue:
     runs-on: ubuntu-20.04
     env:
-      src_repository_token: ${{ secrets.SRC_REPOSITORY_TOKEN }}
+      src_repo: yumemi/droid-training-renewal
+      src_repo_token: ${{ secrets.SRC_REPO_TOKEN }}
+      dst_repo: ${{ github.repository	 }}
+      dst_repo_token: ${{ secrets.GITHUB_TOKEN }} 
     steps:
-      - name: Check Repository
-        run: echo ${{ env.src_repository }}
-      - name: Check Repository Token
-        if: env.src_repository_token != ''
-        run: echo "Token found"
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+      - name: Run Script
+        if: env.src_repo != env.dst_repo
+        run: |
+          gem install octokit -v '6.0.1'
+          ruby .github/workflows/copy-issue.rb
