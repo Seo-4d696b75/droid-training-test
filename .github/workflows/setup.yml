@@ -8,9 +8,11 @@ env:
 jobs:
   wakeup:
     runs-on: ubuntu-20.04
+    env:
+      src_repository_token: ${{ secrets.SRC_REPOSITORY_TOKEN }}
     steps:
       - name: Check Repository
         run: echo ${{ env.src_repository }}
       - name: Check Repository Token
-        if: secrets.SRC_REPOSITORY_TOKEN != ''
+        if: env.src_repository_token != ''
         run: echo "Token found"
